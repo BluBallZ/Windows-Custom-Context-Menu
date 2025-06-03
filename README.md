@@ -14,7 +14,7 @@ This repository provides a versatile .reg file template, allowing you to easily 
 
 Follow these simple steps to customize your Windows context menus:
 
-    Download: Get the context_menu_template.reg file from this repository.
+    Download: Get the WindowsCustomContextMenu.reg file from this repository.
     Open in Text Editor: Right-click on WindowsCustomContextMenu.reg and select "Edit" or open it with Notepad, VS Code, or any other plain text editor.
     Uncomment and Customize:
         The file is heavily commented with ;; at the start of each line to keep sections disabled by default.
@@ -39,16 +39,14 @@ This repository also includes a powerful batch script to help you easily create 
     Locate the RegEdit_Uninstaller.bat file: This is the batch script you downloaded.
     Prepare Your Original .reg File: Ensure you have the original .reg file (e.g., WindowsCustomContextMenu.reg) that you used to add the entries. This script will parse that file to identify the keys to remove.
     Generate Uninstallers:
-        Drag your original custom .reg file (e.g., WindowsCustomContextMenu.reg) directly onto the RegEdit_Uninstaller.bat script.
-        A command prompt window will open, parse your file, and create individual uninstaller .reg files.
-        These newly generated uninstaller files will be placed in a new folder named RegUninstallers
+        Run the batch file or Drag your original custom .reg file (e.g., WindowsCustomContextMenu.reg) directly onto the RegEdit_Uninstaller.bat script.
+        A command prompt window will open, parse your file, and create uninstaller .reg file.
+        This newly generated uninstaller files will be placed in the folder
     Run an Uninstaller:
-        Navigate to the RegUninstallers folder.
-        Find the specific Uninstall_YOUR_KEY_PATH.reg file that corresponds to the entry you wish to remove (the filename will reflect the registry path).
-        Double-click this uninstaller .reg file.
+        Double-click this uninstaller.reg file.
         Confirm the security prompts (click "Yes" twice) to remove the entry from your registry.
 
-This process ensures you can selectively remove any custom context menu options you've added without manually navigating the Registry Editor.
+This process ensures you can remove all custom context menu options you've added without manually navigating the Registry Editor.
 
     
 ---
