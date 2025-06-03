@@ -1,0 +1,197 @@
+Windows Registry Editor Version 5.00
+; Author: BluBallZ
+; Version: 1.1
+; Licence: GNU General Public License v3.0 (https://www.gnu.org/licenses/gpl-3.0.en.html)
+; Url: https://github.com/BluBallZ?tab=repositories
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
+;;  Windows Registry Context Menu Template
+;;  Created by your AI assistant
+;;
+;;  Instructions:
+;;  1. Save this content as a .reg file (e.g., "CustomContextMenu.reg").
+;;  2. Edit the file in a plain text editor (like Notepad).
+;;  3. Uncomment (remove the leading semicolons ";;") the sections you want to enable.
+;;     Ensure both the shell and command subkeys are uncommented together to avoid errors.
+;;  4. Replace "YOUR_APPLICATION_NAME" with the name you want to see in the context menu.
+;;  5. Replace "C:\\Path\\To\\Your\\Application\\your_app.exe" with the actual path to your application's executable.
+;;  6. Check for existing context menu entries with the same name in Registry Editor (regedit.exe)
+;;     to avoid overwriting them. Choose unique names for your entries.
+;;  7. Double-click the .reg file to merge it into your Windows Registry. If errors occur,
+;;     try running as administrator.
+;;  8. To remove an entry, you can either delete the corresponding keys in the Registry Editor
+;;     or create a new .reg file with a minus sign "-" before the key path (e.g., [-HKEY_CLASSES_ROOT\DesktopBackground\shell\YOUR_APPLICATION_NAME]).
+;;  9. This file uses "Windows Registry Editor Version 5.00", compatible with Windows XP and later.
+;;     For older systems, use "REGEDIT4" format.
+;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
+;;  SECTION 1: RIGHT-CLICK ON DESKTOP BACKGROUND
+;;  (When you right-click on an empty area of your desktop)
+;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;[HKEY_CLASSES_ROOT\DesktopBackground\shell\YOUR_APPLICATION_NAME_DESKTOP]
+;@="YOUR_APPLICATION_NAME (Desktop)" ; This is the text that appears in the context menu
+;"Icon"="\"C:\\Path\\To\\Your\\Application\\your_app.exe\",0" ; Optional: Adds an icon (use executable path, 0 for first icon)
+;"Extended"="" ; Optional: Makes this entry appear only when holding Shift while right-clicking
+
+;[HKEY_CLASSES_ROOT\DesktopBackground\shell\YOUR_APPLICATION_NAME_DESKTOP\command]
+;@="\"C:\\Path\\To\\Your\\Application\\your_app.exe\"" ; Double quotes are important for paths with spaces
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
+;;  SECTION 2: RIGHT-CLICK ON FOLDERS
+;;  (When you right-click on any folder)
+;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;[HKEY_CLASSES_ROOT\Directory\shell\YOUR_APPLICATION_NAME_FOLDER]
+;@="YOUR_APPLICATION_NAME (Folder)"
+;"Icon"="\"C:\\Path\\To\\Your\\Application\\your_app.exe\",0"
+;"Extended"="" ; Optional: Shift+right-click only
+
+;[HKEY_CLASSES_ROOT\Directory\shell\YOUR_APPLICATION_NAME_FOLDER\command]
+;@="\"C:\\Path\\To\\Your\\Application\\your_app.exe\" \"%1\"" ; "%1" passes the folder path to the app
+
+;; For opening a folder background (right-click in an empty area *inside* a folder)
+;[HKEY_CLASSES_ROOT\Directory\Background\shell\YOUR_APPLICATION_NAME_FOLDER_BACKGROUND]
+;@="YOUR_APPLICATION_NAME (Folder Background)"
+;"Icon"="\"C:\\Path\\To\\Your\\Application\\your_app.exe\",0"
+;"Extended"="" ; Optional: Shift+right-click only
+
+;[HKEY_CLASSES_ROOT\Directory\Background\shell\YOUR_APPLICATION_NAME_FOLDER_BACKGROUND\command]
+;@="\"C:\\Path\\To\\Your\\Application\\your_app.exe\" \"%V\"" ; "%V" passes the current folder path
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
+;;  SECTION 3: RIGHT-CLICK ON ALL FILES (Generic)
+;;  (When you right-click on any file, regardless of its type)
+;;  Use with caution, as this can clutter your menu significantly.
+;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;[HKEY_CLASSES_ROOT\*\shell\YOUR_APPLICATION_NAME_ALL_FILES]
+;@="YOUR_APPLICATION_NAME (All Files)"
+;"Icon"="\"C:\\Path\\To\\Your\\Application\\your_app.exe\",0"
+;"Extended"="" ; Optional: Shift+right-click only
+
+;[HKEY_CLASSES_ROOT\*\shell\YOUR_APPLICATION_NAME_ALL_FILES\command]
+;@="\"C:\\Path\\To\\Your\\Application\\your_app.exe\" \"%1\"" ; "%1" passes the file path to the app
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
+;;  SECTION 4: RIGHT-CLICK ON SPECIFIC FILE TYPES
+;;  (When you right-click on a file with a specific extension, e.g., .txt, .jpg, .pdf)
+;;  You can specify multiple file types by creating a new block for each.
+;;  Note: Some file types may not be covered by broad associations like "image".
+;;        Check Registry Editor for specific extensions (e.g., .png, .jpg) if needed.
+;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; Example: For .txt files
+;[HKEY_CLASSES_ROOT\SystemFileAssociations\.txt\shell\YOUR_APPLICATION_NAME_TXT]
+;@="YOUR_APPLICATION_NAME (Text File)"
+;"Icon"="\"C:\\Path\\To\\Your\\Application\\your_app.exe\",0"
+;"Extended"="" ; Optional: Shift+right-click only
+
+;[HKEY_CLASSES_ROOT\SystemFileAssociations\.txt\shell\YOUR_APPLICATION_NAME_TXT\command]
+;@="\"C:\\Path\\To\\Your\\Application\\your_app.exe\" \"%1\""
+
+;; Example: For .jpg and .jpeg image files
+;;[HKEY_CLASSES_ROOT\SystemFileAssociations\image\shell\YOUR_APPLICATION_NAME]
+;;@="YOUR_APPLICATION_NAME"
+;;"Icon"="\"C:\\Path\\To\\Your\\Application\\your_app.exe\",0"
+;"Extended"="" ; Optional: Shift+right-click only
+
+;;[HKEY_CLASSES_ROOT\SystemFileAssociations\image\shell\YOUR_APPLICATION_NAME\command]
+;;@="\"C:\\Path\\To\\Your\\Application\\your_app.exe\" \"%1\""
+; Note: Verify the APP path above matches your system's installation. Update if necessary.
+
+;; If "image" doesn't work for all image types, you can target specific extensions:
+;; For .png files
+;[HKEY_CLASSES_ROOT\SystemFileAssociations\.png\shell\YOUR_APPLICATION_NAME_PNG]
+;@="YOUR_APPLICATION_NAME (PNG Image)"
+;"Icon"="\"C:\\Path\\To\\Your\\Application\\your_app.exe\",0"
+;"Extended"="" ; Optional: Shift+right-click only
+
+;[HKEY_CLASSES_ROOT\SystemFileAssociations\.png\shell\YOUR_APPLICATION_NAME_PNG\command]
+;@="\"C:\\Path\\To\\Your\\Application\\your_app.exe\" \"%1\""
+
+;; For .pdf files
+;[HKEY_CLASSES_ROOT\SystemFileAssociations\.pdf\shell\YOUR_APPLICATION_NAME_PDF]
+;@="YOUR_APPLICATION_NAME (PDF Document)"
+;"Icon"="\"C:\\Path\\To\\Your\\Application\\your_app.exe\",0"
+;"Extended"="" ; Optional: Shift+right-click only
+
+;[HKEY_CLASSES_ROOT\SystemFileAssociations\.pdf\shell\YOUR_APPLICATION_NAME_PDF\command]
+;@="\"C:\\Path\\To\\Your\\Application\\your_app.exe\" \"%1\""
+
+;; For .docx files
+;[HKEY_CLASSES_ROOT\SystemFileAssociations\.docx\shell\YOUR_APPLICATION_NAME_DOCX]
+;@="YOUR_APPLICATION_NAME (Word Document)"
+;"Icon"="\"C:\\Path\\To\\Your\\Application\\your_app.exe\",0"
+;"Extended"="" ; Optional: Shift+right-click only
+
+;[HKEY_CLASSES_ROOT\SystemFileAssociations\.docx\shell\YOUR_APPLICATION_NAME_DOCX\command]
+;@="\"C:\\Path\\To\\Your\\Application\\your_app.exe\" \"%1\""
+
+;; For .zip files
+;[HKEY_CLASSES_ROOT\SystemFileAssociations\.zip\shell\YOUR_APPLICATION_NAME_ZIP]
+;@="YOUR_APPLICATION_NAME (Zip Archive)"
+;"Icon"="\"C:\\Path\\To\\Your\\Application\\your_app.exe\",0"
+;"Extended"="" ; Optional: Shift+right-click only
+
+;[HKEY_CLASSES_ROOT\SystemFileAssociations\.zip\shell\YOUR_APPLICATION_NAME_ZIP\command]
+;@="\"C:\\Path\\To\\Your\\Application\\your_app.exe\" \"%1\""
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
+;;  SECTION 5: CASCADE MENU (Submenu) - Advanced
+;;  This allows you to group multiple options under a single main menu item.
+;;  Useful if you want to add many related options without cluttering the main menu.
+;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; Example: A "My Custom Tools" submenu on the desktop background
+;[HKEY_CLASSES_ROOT\DesktopBackground\shell\MyCustomTools]
+;@="My Custom Tools"
+;"SubCommands"="" ; This tells Windows to create a submenu
+;"Icon"="\"C:\\Windows\\System32\\shell32.dll\",0" ; Optional: Use a system icon
+;"Extended"="" ; Optional: Shift+right-click only
+
+;; First item in the submenu
+;[HKEY_CLASSES_ROOT\DesktopBackground\shell\MyCustomTools\shell\OpenNotepad]
+;@="Open Notepad"
+;"Icon"="\"C:\\Windows\\System32\\notepad.exe\",0"
+
+;[HKEY_CLASSES_ROOT\DesktopBackground\shell\MyCustomTools\shell\OpenNotepad\command]
+;@="\"C:\\Windows\\System32\\notepad.exe\""
+
+;; Second item in the submenu
+;[HKEY_CLASSES_ROOT\DesktopBackground\shell\MyCustomTools\shell\OpenCalculator]
+;@="Open Calculator"
+;"Icon"="\"C:\\Windows\\System32\\calc.exe\",0"
+
+;[HKEY_CLASSES_ROOT\DesktopBackground\shell\MyCustomTools\shell\OpenCalculator\command]
+;@="\"C:\\Windows\\System32\\calc.exe\""
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
+;;  IMPORTANT NOTES:
+;;  - Always back up your registry before making changes (export via regedit.exe).
+;;  - Be careful with paths. Use double backslashes "\\" for directory separators.
+;;  - Enclose paths with spaces in double quotes, and escape those quotes
+;;    with a backslash (e.g., "\"C:\\Program Files\\App\\app.exe\"").
+;;  - "%1" passes the path of the selected file/folder.
+;;  - "%V" passes the path of the current folder (useful for folder background).
+;;  - To remove an entry, you can either:
+;;    a) Manually delete the corresponding keys in Regedit.
+;;    b) Create a .reg file with a minus sign "-" before the key path, e.g.:
+;;       Windows Registry Editor Version 5.00
+;;       [-HKEY_CLASSES_ROOT\DesktopBackground\shell\YOUR_APPLICATION_NAME_DESKTOP]
+;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
